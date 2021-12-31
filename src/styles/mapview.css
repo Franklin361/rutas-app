@@ -48,15 +48,18 @@
   border-left-color: var(--anchor-color);
 }
 .container_map {
+  animation: fadeIn 1s;
   min-height: 100vh;
   width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
   z-index: -1;
+  
 }
 
 .container_data_directions {
+  animation: fadeIn 1s;
   position: absolute;
 
   z-index: 99;
@@ -73,6 +76,7 @@
 }
 
 .container_profile {
+  animation: backInUp 1s;
   background-color: black;
   outline: 3px solid slateblue;
   outline-offset: 3px;
@@ -92,6 +96,9 @@
   padding: 0 1em;
 }
 .container_profile > img {
+  animation: bounce 1s linear;
+  animation-delay: 5s;
+  /* animation: tada 3s linear infinite; */
   width: 50px;
   height: 50px; 
   object-fit: cover;
@@ -112,6 +119,8 @@
   }
 
   .container_profile {
+    animation: backInDown 1s;
+    
     bottom: auto;
     top: 10px;
     right: auto;

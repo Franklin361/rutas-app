@@ -21,15 +21,6 @@
   animation: fadein 2s alternate infinite;
 }
 
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
@@ -44,12 +35,4 @@
   border: 7px solid #fff;
   border-color: #fff transparent #fff transparent;
   animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }

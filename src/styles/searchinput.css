@@ -6,6 +6,7 @@
   transition: all .2s ease;
 }
 .container_input-search {
+  animation: backInDown 1s;
   position: absolute;
   overflow: hidden;
   top: 10px;

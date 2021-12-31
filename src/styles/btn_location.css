@@ -1,4 +1,7 @@
 .btn_my_location {
+
+  animation: backInUp 1s;
+
   font-size: 1em;
   border: none;
   background-color: slateblue;

@@ -1,3 +1,4 @@
+import { showAlert } from './showAlert';
 
 export const getUserLocation = async(): Promise<[number, number]> => {
     return new  Promise( (resolve, reject)=> {
@@ -6,7 +7,9 @@ export const getUserLocation = async(): Promise<[number, number]> => {
                 resolve([longitude, latitude]);
             },
             (err)=>{
-                alert('Se nesecita dar permiso para usar su ubicación');
+                
+                showAlert({ icon: 'error', title: 'Error al obtener la ubicación', text: 'Para usar esta app es necesario otorgar permiso para usar tu ubicación' })
+
                 console.log(err)
                 reject();
             }

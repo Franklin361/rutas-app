@@ -90,9 +90,9 @@
 }
 
 @media screen and (max-width: 600px) {
-  .container_results_places{
+  .container_results_places, .loading_result{
     width: calc(100% - 20px);
-    max-height: 85vh;
+    max-height: 80vh;
   }
   .container_btn_route{
     justify-content:space-between;

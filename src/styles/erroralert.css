@@ -19,16 +19,26 @@
 }
 .text-error {
   font-weight: bold;
-  font-size: 5em;
+  font-size: 4.5em;
   color: white;
+  text-shadow: 10px 10px 5px rgba(8, 8, 8, 0.966);
+
+  display: block;
+  width: 70%;
+
+  animation: bounce 1s linear;
+  transform-origin: center bottom;
 }
 
 .container_error > .icon {
   font-size: 14em;
   color: white;
+  animation: tada 3s linear infinite;
 }
 .text-error > span {
   color: slateblue;
+
+  animation: fadeIn 1s alternate infinite;
 }
 
 .container_bloob {
@@ -46,9 +56,12 @@
   fill: rgb(27, 27, 29);
 }
 
+
+
 @media screen and (max-width: 800px) {
   .text-error {
     font-size: 2em;
+    width: 100%;
   }
 
   .container_error > .icon {
