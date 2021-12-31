@@ -1,0 +1,32 @@
+.btn_my_location {
+  font-size: 1em;
+  border: none;
+  background-color: slateblue;
+  color: white;
+  border-radius: 30px;
+  padding: 1em;
+  gap: 0.5em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: fixed;
+  bottom: 50px;
+  left: 20px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.452);
+}
+.btn_my_location:hover {
+  background-color: rgb(93, 80, 177);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.774);
+}
+.btn_my_location > .icon {
+  font-size: 1.5em;
+}
+
+@media screen and (max-width: 600px) {
+  .btn_my_location > span {
+    display: none;
+  }
+}

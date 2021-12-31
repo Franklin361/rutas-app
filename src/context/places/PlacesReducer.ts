@@ -4,7 +4,8 @@ import { Feature } from '../../interfaces/searchmapbox';
 type ActionTypes =
     { type: 'setUserLocation', payload: [number, number] } |
     { type: 'setLoadingPlaces' } |
-    { type: 'setPlaces', payload: Feature[] }
+    { type: 'setLoading' } |
+    { type: 'setPlaces', payload: Feature[] | null }
 
 
 export const placesReducer = (state: PlaceState, action: ActionTypes): PlaceState => {
@@ -20,6 +21,11 @@ export const placesReducer = (state: PlaceState, action: ActionTypes): PlaceStat
             return {
                 ...state,
                 isLoadingPlaces: true
+            }
+        case 'setLoading':
+            return {
+                ...state,
+                isLoading: false
             }
         case 'setPlaces':
             return {

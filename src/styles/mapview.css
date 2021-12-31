@@ -1,0 +1,120 @@
+:root {
+  --anchor-color: #ccc;
+}
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+.mapboxgl-popup-content {
+  background-color: var(--anchor-color);
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  align-self: center;
+  border-left: none;
+  border-right-color: var(--anchor-color);
+}
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  align-self: center;
+  border-bottom: none;
+  border-top-color: var(--anchor-color);
+}
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  align-self: center;
+  border-top: none;
+  border-bottom-color: var(--anchor-color);
+}
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  align-self: flex-end;
+  border-top: none;
+  border-right: none;
+  border-bottom-color: var(--anchor-color);
+}
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip {
+  align-self: flex-start;
+  border-top: none;
+  border-left: none;
+  border-bottom-color: var(--anchor-color);
+}
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  align-self: flex-end;
+  border-bottom: none;
+  border-right: none;
+  border-top-color: var(--anchor-color);
+}
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  align-self: center;
+  border-right: none;
+  border-left-color: var(--anchor-color);
+}
+.container_map {
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.container_data_directions {
+  position: absolute;
+
+  z-index: 99;
+  background-color: black;
+  border-radius: 5px;
+  padding: 1em;
+  color: white;
+  bottom: 120px;
+  left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.container_profile {
+  background-color: black;
+  outline: 3px solid slateblue;
+  outline-offset: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 30px;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+}
+.container_profile > span {
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  display: block;
+  padding: 0 1em;
+}
+.container_profile > img {
+  width: 50px;
+  height: 50px; 
+  object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+  .container_data_directions {
+    bottom: 40px;
+    right: 20px;
+    left: auto;
+    z-index: 1;
+  }
+  .container_data_directions > p {
+    font-size: 1em;
+  }
+  .container_profile > span {
+    display: none;
+  }
+
+  .container_profile {
+    bottom: auto;
+    top: 10px;
+    right: auto;
+    left: 10px;
+  }
+}

@@ -10,7 +10,7 @@ export interface PlaceState {
     isLoading: boolean,
     isLoadingPlaces: boolean,
     userLocation?: [ number, number ],
-    places: Feature[]
+    places: Feature[] | null
 }
 
 const INITIAL_STATE: PlaceState = {
@@ -24,10 +24,12 @@ export const PlacesProvider: React.FC = ({children}) => {
     const [state, dispatch] = useReducer(placesReducer,INITIAL_STATE);
 
     useEffect(() => {
-        getUserLocation().then( lnglat => dispatch({ type: 'setUserLocation', payload:lnglat}))
+        getUserLocation().then( lnglat => dispatch({ type: 'setUserLocation', payload:lnglat})).catch(e => {
+            dispatch({type:'setLoading'})
+        })
     }, []);
 
-    const searchPlacesByTerm = async(query:string): Promise<Feature[]> => {
+    const searchPlacesByTerm = async(query:string) => {
         if(query.length === 0 ) {
             dispatch({type: 'setPlaces', payload: []})
             return [];
@@ -42,8 +44,7 @@ export const PlacesProvider: React.FC = ({children}) => {
             }
         })
 
-        dispatch({ type: 'setPlaces', payload:res.data.features })
-        return res.data.features
+        dispatch({ type: 'setPlaces', payload: (res.data.features.length === 0) ? null : res.data.features  });
     };
 
     return (

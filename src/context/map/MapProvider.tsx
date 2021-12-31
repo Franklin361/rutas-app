@@ -8,8 +8,10 @@ import { ResponseDirections } from '../../interfaces/directionmapbosx';
 
 export interface MapState {
     isMapReady: boolean;
-    map?: Map,
-    markers: Marker[]
+    map?: Map;
+    markers: Marker[];
+    distance?: number;
+    duration?:number;
 }
 
 const INITIAL_STATE: MapState = {
@@ -27,21 +29,26 @@ export const MapProvider: React.FC = ({ children }) => {
 
         state.markers.forEach(marker => marker.remove());
         const newMarkers: Marker[] = [];
-
+        if(places){
         for (const place of places) {
             const [lng, lat] = place.center;
-            const popUp = new Popup().setHTML(` 
+            const popUp = new Popup({closeButton: false}).setHTML(` 
             <div class="text-black text-center">
-                <h1 class="text-lg">${place.place_name_es}</h1>
+                <h5 class="text-lg">${place.place_name_es}</h5>
                 <p>${place.text}</p>
             </div> `);
-            const marker = new Marker({color: '#5e50ac'}).setPopup(popUp).setLngLat([lng, lat]).addTo(state.map!)
+            const marker = new Marker({color: '#c2367c'}).setPopup(popUp).setLngLat([lng, lat]).addTo(state.map!)
 
             newMarkers.push(marker)
         }
 
         dispatch({ type: 'setMarkers', payload: newMarkers });
 
+        if(places.length === 0) {
+            deletePolylineOfMap();
+            dispatch({type:'resetDuration-Distance' })
+        }
+    }
     }, [places])
 
     const setMap = (map: Map) => {
@@ -54,8 +61,8 @@ export const MapProvider: React.FC = ({ children }) => {
         `)
 
         new Marker({
-            color: '#5e50ac',
-            scale: 2
+            color: '#63df29',
+            scale: 1.5
         })
             .setLngLat(map.getCenter())
             .setPopup(popup)
@@ -70,6 +77,7 @@ export const MapProvider: React.FC = ({ children }) => {
         const res = await direcionsApi.get<ResponseDirections>(`${start.join(',')};${end.join(',')}`);
 
         const { distance, duration, geometry } = res.data.routes[0];
+        
         const { coordinates } = geometry
         
         const bounds = new LngLatBounds(start, start);
@@ -100,10 +108,7 @@ export const MapProvider: React.FC = ({ children }) => {
             },
         };
         
-        if(state.map?.getLayer('route')){
-            state.map?.removeLayer('route');
-            state.map?.removeSource('route');
-        }
+        deletePolylineOfMap();
 
         state.map?.addSource( 'route', sourceData );
         state.map?.addLayer({
@@ -120,6 +125,18 @@ export const MapProvider: React.FC = ({ children }) => {
             }
         })
 
+        // distancia en metros - duration en segundos
+        const newDistance = +(distance / 1000).toFixed(2)
+        const newDuration = +(duration / 60).toFixed(2)
+        dispatch({type:'setDuration-Distance', payload:{ distance: newDistance, duration: newDuration }});
+
+    };
+
+    const deletePolylineOfMap = () => {
+        if(state.map?.getLayer('route')){
+            state.map?.removeLayer('route');
+            state.map?.removeSource('route');
+        }
     };
 
     return (

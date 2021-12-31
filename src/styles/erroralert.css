@@ -1,0 +1,57 @@
+.container_error {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background-color: rgb(39, 37, 37);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  text-align: center;
+  padding: 1em;
+  position: relative;
+  overflow: hidden;
+}
+.text-error {
+  font-weight: bold;
+  font-size: 5em;
+  color: white;
+}
+
+.container_error > .icon {
+  font-size: 14em;
+  color: white;
+}
+.text-error > span {
+  color: slateblue;
+}
+
+.container_bloob {
+  outline: auto;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+.svg_bloob {
+  width: 100%;
+  height: 100%;
+}
+.path_bloob {
+  fill: rgb(27, 27, 29);
+}
+
+@media screen and (max-width: 800px) {
+  .text-error {
+    font-size: 2em;
+  }
+
+  .container_error > .icon {
+    font-size: 7em;
+  }
+}

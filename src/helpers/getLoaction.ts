@@ -6,7 +6,7 @@ export const getUserLocation = async(): Promise<[number, number]> => {
                 resolve([longitude, latitude]);
             },
             (err)=>{
-                alert('error');
+                alert('Se nesecita dar permiso para usar su ubicación');
                 console.log(err)
                 reject();
             }

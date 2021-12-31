@@ -1,0 +1,101 @@
+.container_results_places, .loading_result {
+  width: 500px;
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  z-index: 99;
+  border-radius: 7px;
+  padding: 1em;
+  background-color: rgb(15, 13, 13);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.568);
+  opacity: 1;
+  transition: all .3s ease;
+}
+
+.container_results_places{
+  
+  min-height: 200px;
+  max-height: 80vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.container_results_places::-webkit-scrollbar {
+  width: 0;
+}
+
+.container_place {
+  background-color: rgb(34, 28, 28);
+  border-radius: 5px;
+  padding: 1em;
+  transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.container_btn_route{
+    margin-top: 1em;
+    width: 100%;
+    
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    gap: 1.5em;
+}
+.btn_trazar_ruta {
+    font-size: 1em;
+    background: rgb(0, 0, 0);
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: .5em;
+    box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.164);
+    border: 1px solid transparent;
+    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: .5em;
+    font-weight: bold;
+}
+.btn_trazar_ruta:hover{
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.438);
+    border: 1px solid black;
+    background: slateblue;
+}
+
+.btn_trazar_ruta:active{
+    background: rgb(93, 80, 180);
+}
+
+#show:checked ~ .container_results_places{
+  width: 0;
+  padding: 0;
+  border: none;
+  opacity: 0;
+}
+
+#show:checked ~ .container_results_places > .container_place > .container_btn_route > .btn_trazar_ruta {
+  display: none;
+}
+
+.active_place{
+  background-color: slateblue;
+}
+.active_place .btn_trazar_ruta:hover{
+  background-color: rgb(34, 28, 28);
+}
+
+@media screen and (max-width: 600px) {
+  .container_results_places{
+    width: calc(100% - 20px);
+    max-height: 85vh;
+  }
+  .container_btn_route{
+    justify-content:space-between;
+    gap: 0;
+}
+}

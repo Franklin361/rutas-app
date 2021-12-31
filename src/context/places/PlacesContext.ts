@@ -5,8 +5,8 @@ interface PlaceContextProps {
     isLoading: boolean,
     isLoadingPlaces: boolean,
     userLocation?: [ number, number ],
-    places: Feature[]
-    searchPlacesByTerm: (query: string) => Promise<Feature[]>;
+    places: Feature[] | null
+    searchPlacesByTerm: (query: string) => void;
 }
 
 export const PlacesContext = createContext<PlaceContextProps>({} as PlaceContextProps);
