@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AiOutlineRightCircle, AiOutlineEnvironment } from "react-icons/ai";
+import { AiOutlineEnvironment } from "react-icons/ai";
 import { MapContext } from '../context/map/MapContext';
 import { PlacesContext } from '../context/places/PlacesContext';
 export const BtnMyLocation = () => {
@@ -15,7 +15,7 @@ export const BtnMyLocation = () => {
             onClick={handleClick}
         >
 
-            <span>Ir a mi ubicación</span>
+            <span>My location</span>
 
             <AiOutlineEnvironment className="icon" />
         </button>

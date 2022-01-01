@@ -11,23 +11,31 @@
   border: 1px solid rgba(255, 255, 255, 0.568);
   opacity: 1;
   transition: all .3s ease;
-}
+  overflow-y: scroll;
 
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+.loading_result > .icon {
+  font-size: 1.4em;
+} 
 .container_results_places{
   
   min-height: 200px;
   max-height: 80vh;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 1.5em;
 }
 
-.container_results_places::-webkit-scrollbar {
+.container_results_places::-webkit-scrollbar,
+.loading_result::-webkit-scrollbar {
   width: 0;
 }
 
 .container_place {
+  width: 100%;
   background-color: rgb(34, 28, 28);
   border-radius: 5px;
   padding: 1em;
@@ -71,12 +79,18 @@
     background: rgb(93, 80, 180);
 }
 
-#show:checked ~ .container_results_places{
+#show:checked ~ .container_results_places, #show:checked ~  .loading_result{
   width: 0;
   padding: 0;
   border: none;
   opacity: 0;
+  
 }
+
+#show:checked ~ .container_results_places, #show:checked ~  .loading_result > p, 
+#show:checked ~ .container_results_places, #show:checked ~  .loading_result > .icon {
+  display: none;
+} 
 
 #show:checked ~ .container_results_places > .container_place > .container_btn_route > .btn_trazar_ruta {
   display: none;

@@ -23,24 +23,36 @@ const INITIAL_STATE: MapState = {
 export const MapProvider: React.FC = ({ children }) => {
 
     const [state, dispatch] = useReducer(mapReducer, INITIAL_STATE);
-    const { places } = useContext(PlacesContext);
+    const { places, userLocation } = useContext(PlacesContext);
 
 
     useEffect(() => {
 
+        deletePolylineOfMap();
         state.markers.forEach(marker => marker.remove());
         const newMarkers: Marker[] = [];
+
+        const bounds = new LngLatBounds();
+
         if (places) {
             for (const place of places) {
                 const [lng, lat] = place.center;
-                const popUp = new Popup({ closeButton: false }).setHTML(` 
-            <div class="text-black text-center">
-                <h5 class="text-lg">${place.place_name_es}</h5>
-                <p>${place.text}</p>
-            </div> `);
-                const marker = new Marker({ color: '#c2367c' }).setPopup(popUp).setLngLat([lng, lat]).addTo(state.map!)
+                const popUp = new Popup({ closeButton: false })
+                    .setHTML(` 
+                        <div class="text-black text-center">
+                            <h5 class="text-lg">${place.place_name_es}</h5>
+                            <p>${place.text}</p>
+                        </div>
+                    `);
 
-                newMarkers.push(marker)
+                const marker = new Marker({ color: '#c2367c' })
+                    .setPopup(popUp)
+                    .setLngLat([lng, lat])
+                    .addTo(state.map!)
+
+                newMarkers.push(marker);
+
+                bounds.extend(marker.getLngLat());
             }
 
             dispatch({ type: 'setMarkers', payload: newMarkers });
@@ -49,6 +61,13 @@ export const MapProvider: React.FC = ({ children }) => {
                 deletePolylineOfMap();
                 dispatch({ type: 'resetDuration-Distance' })
             }
+        }
+
+        if(newMarkers.length !== 0 && userLocation){
+            bounds.extend(userLocation);
+            state.map?.fitBounds(bounds, { padding: 60 })
+        } else{
+            state.map?.flyTo({ center: userLocation, zoom: 15 });
         }
     }, [places])
 
@@ -78,7 +97,7 @@ export const MapProvider: React.FC = ({ children }) => {
         const res = await direcionsApi.get<ResponseDirections>(`${start.join(',')};${end.join(',')}`);
 
         if (res.data.routes.length === 0) {
-            showAlert({ icon: 'warning', title: 'Ruta no encontrada', text: 'No se pudo trazar una ruta al lugar que desea' });
+            showAlert({ icon: 'warning', title: 'Route not found', text: "Couldn't trace a route to the place you want" });
             return;
         }
 
@@ -94,7 +113,7 @@ export const MapProvider: React.FC = ({ children }) => {
         }
 
         state.map?.fitBounds(bounds, {
-            padding: 200
+            padding:80,
         });
 
         const sourceData: AnySourceData = {

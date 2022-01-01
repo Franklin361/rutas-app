@@ -32,9 +32,11 @@ export const MapView = () => {
             const map = new Map({
                 container: mapDiv.current!,
                 style: styleMap.dark,
+                // pitchWithRotate: false,
                 center: userLocation,
                 zoom: 15,
-                accessToken: token
+                accessToken: token,
+                
             });
 
             setMap(map)
@@ -55,8 +57,8 @@ export const MapView = () => {
             {
                 (distance && duration)
                 && <div className="container_data_directions">
-                    <p>Distancia: <b>{distance} km.</b></p>
-                    <p>Duración: <b>{duration} min.</b></p>
+                    <p>Distance: <b>{distance} km.</b></p>
+                    <p>Duration: <b>{duration} min.</b></p>
                 </div>
             }
 

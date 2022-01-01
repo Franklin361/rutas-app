@@ -3,10 +3,10 @@ import { PlacesContext } from '../context/places/PlacesContext';
 import { Feature } from '../interfaces/searchmapbox';
 import { MapContext } from '../context/map/MapContext';
 import { BiCar } from "react-icons/bi";
-import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineFrown } from "react-icons/ai";
 
 export const SearchResults = () => {
-
+    
     const { places, isLoadingPlaces, userLocation } = useContext(PlacesContext);
     const { map, getRouteBetweenRoutes } = useContext(MapContext);
 
@@ -28,11 +28,11 @@ export const SearchResults = () => {
     };
 
     if (isLoadingPlaces) {
-        return <div className="loading_result"><p>Cargando resultados...</p></div>
+        return <div className="loading_result"><p>Loading results...</p></div>
     }
     
     if (!places) {
-        return <div className="loading_result"><p>No resultados...</p></div>
+        return <div className="loading_result"><p>No results found ...</p><AiOutlineFrown className="icon"/></div>
     }
 
 
@@ -52,7 +52,7 @@ export const SearchResults = () => {
                                 className="btn_trazar_ruta"
                                 onClick={() => handleClick(place)}
                             >
-                                ver lugar
+                                See place
                                 <AiOutlineEye className="icon_btn" />
                             </label>
 
@@ -60,7 +60,7 @@ export const SearchResults = () => {
                                 className="btn_trazar_ruta"
                                 onClick={() => getRoute(place)}
                             >
-                                Trazar ruta
+                                    Show route
                                 <BiCar className="icon_btn" />
                             </label>
                         </div>

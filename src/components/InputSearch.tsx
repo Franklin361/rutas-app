@@ -5,8 +5,10 @@ import { PlacesContext } from '../context/places/PlacesContext';
 import { SearchResults } from './SearchResults';
 
 export const InputSearch = () => {
-    const { searchPlacesByTerm, places } = useContext(PlacesContext)
+    const { searchPlacesByTerm } = useContext(PlacesContext);
 
+    const input = useRef<HTMLInputElement>(null);
+    const [check, setCheck] = useState(false)
 
     const debounceRef = useRef<number>();
 
@@ -21,17 +23,22 @@ export const InputSearch = () => {
 
     };
 
+    useEffect(() => {
+        
+        (check) && input.current?.focus()
 
+    }, [check])
 
     return (
         <div>
-            <input type="checkbox" id="show" defaultChecked={true} />
+            <input type="checkbox" id="show" defaultChecked={true} onChange={()=> setCheck(!check)} />
 
             <div className='container_input-search'>
                 <input
+                    ref={input}
                     className={`text_input`}
                     type="text"
-                    placeholder='Search Place'
+                    placeholder='Search for a place'
                     onChange={onQueryChanged}
                 />
 

@@ -32,4 +32,9 @@
   .btn_my_location > span {
     display: none;
   }
+
+  .btn_my_location {
+    bottom: 10px;
+    left: 10px;
+  }
 }

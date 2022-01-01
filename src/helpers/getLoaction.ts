@@ -8,7 +8,7 @@ export const getUserLocation = async(): Promise<[number, number]> => {
             },
             (err)=>{
                 
-                showAlert({ icon: 'error', title: 'Error al obtener la ubicación', text: 'Para usar esta app es necesario otorgar permiso para usar tu ubicación' })
+                showAlert({ icon: 'error', title: 'Failed to get location', text: 'To use this app it is necessary to grant permission to use your location' })
 
                 console.log(err)
                 reject();

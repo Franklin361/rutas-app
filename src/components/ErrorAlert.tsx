@@ -8,7 +8,7 @@ export const ErrorAlert = () => {
                 <Bloob />
             </div>
             <p className="text-error">
-                Es necesario tu <span>ubicación</span> para usar la aplicación
+                Your <span> location </span> is required to use the app
             </p>
             <FaRegSadCry className='icon' />
         </div>
