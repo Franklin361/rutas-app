@@ -12,7 +12,9 @@
 3. Get 10 places matching the search.
 4. View the selected place.
 5. Trace the route from the selected place to the starting point.
-6. Return to your location 
+6. Return to your location.
+7. Use your location to locate you on the map (asking for permissions).
+8. Show distance and travel time from your location to the selected place.
 
 &nbsp;
 
